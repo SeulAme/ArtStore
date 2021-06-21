@@ -1,0 +1,20 @@
+require("dotenv").config();
+//подкл.для работы с БД
+const mongoose = require("mongoose");
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    });
+
+    console.log("MongoDB connection SUCCESS");
+  } catch (error) {
+    console.error("MongoDB connection FAIL");
+    process.exit(1);//завершение процесса
+  }
+};
+
+module.exports = connectDB;
